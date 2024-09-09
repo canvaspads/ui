@@ -51,7 +51,7 @@ jobs:
 
   unit-tests:
     name: Unit Tests
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -59,12 +59,12 @@ jobs:
         id: neon
         uses: ./.github/actions/setup
         with:
-          platform: linux-x64-gnu
+          platform: win32-x64-msvc
       - name: Build
-        shell: bash
+        shell: powershell
         env:
           CARGO_BUILD_TARGET: ${{ steps.neon.outputs.target }}
-          NEON_BUILD_PLATFORM: linux-x64-gnu
+          NEON_BUILD_PLATFORM: win32-x64-msvc
         run: npm run debug
       - name: Test
         shell: bash
